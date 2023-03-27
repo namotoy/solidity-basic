@@ -14,9 +14,16 @@ contract ZombieFactory {
     
     Zombie[] public zombies;
 
+//  ゾンビのオーナーをトラッキングするマッピングの設定
+    mapping (uint => address) public zombieToOwner;
+    mapping (address => uint) ownerZombieCount;
+
   //  ゾンビを配列に追加する
    function _createZombie(string _name, uint _dna) private {
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
+    // ゾンビのオーナーシップを関数を呼び出した人に割り当てる
+        zombieToOwner[id] = msg.sender;
+        ownerZombieCount[msg.sender]++;
         NewZombie(id, _name, _dna);
     }
 // ゾンビのハッシュ値を計算する
