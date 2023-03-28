@@ -33,6 +33,8 @@ contract ZombieFactory {
     }
 // ランダムにゾンビを生成する
     function createRandomZombie(string _name) public {
+        // 最初のゾンビを作るときだけこの関数が呼び出す
+        require(ownerZombieCount[msg.sender] == 0);
         uint randDna = _generateRandomDna(_name);
         _createZombie(_name, randDna);
     }
