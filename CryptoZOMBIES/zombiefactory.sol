@@ -19,7 +19,7 @@ contract ZombieFactory {
     mapping (address => uint) ownerZombieCount;
 
   //  ゾンビを配列に追加する
-   function _createZombie(string _name, uint _dna) private {
+   function _createZombie(string _name, uint _dna) internal {
         uint id = zombies.push(Zombie(_name, _dna)) - 1;
     // ゾンビのオーナーシップを関数を呼び出した人に割り当てる
         zombieToOwner[id] = msg.sender;
